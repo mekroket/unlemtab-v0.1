@@ -143,3 +143,4 @@ if __name__ == "__main__":
 #6.deneme
 #son deneme
 #oguzun pc den gelen değişiklik
+#bu bi rdeğişiklikitr
