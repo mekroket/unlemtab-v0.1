@@ -135,6 +135,3 @@ def logout():
 if __name__ == "__main__":
     app.run(debug=True)
 
-güncellem1.2
-1.3
-1.4
