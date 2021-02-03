@@ -136,5 +136,5 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 #bu değişiklik pull içindir
-
+# bu değişiklik push içindir
 
