@@ -1,0 +1,25 @@
+.carousel-item {
+    height: 500px;
+  }
+  
+.item, img{
+      position: absolute;
+      object-fit:cover;
+      height: 100% !important;
+      width:  100% !important;
+      /*min-height: 500px;*/
+  }
+
+
+.carousel-caption h5{
+
+
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+
+
+
+
+
+}
