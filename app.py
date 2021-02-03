@@ -135,6 +135,3 @@ def logout():
 if __name__ == "__main__":
     app.run(debug=True)
 
-#tab2
-#tab3
-ben bugra naber
