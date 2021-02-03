@@ -135,12 +135,4 @@ def logout():
 if __name__ == "__main__":
     app.run(debug=True)
 
-#bu değişiklik pull içindir
-# bu değişiklik push içindir
-#3.deneme
-#4.deneme
-#5.deneme
-#6.deneme
-#son deneme
-#oguzun pc den gelen değişiklik
-#bu bi rdeğişiklikitr
+#tab2
