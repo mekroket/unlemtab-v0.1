@@ -142,3 +142,4 @@ if __name__ == "__main__":
 #5.deneme
 #6.deneme
 #son deneme
+#oguzun pc den gelen değişiklik
