@@ -126,7 +126,10 @@ def logout():
     return(url_for("index"))
 
 
-
+@app.route("/projects")
+def projects():
+    return render_template("projects.html")
+   
 
 
 if __name__ == "__main__":
