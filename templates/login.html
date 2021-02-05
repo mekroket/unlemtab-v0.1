@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block body %}
 
+<div class="col-md-12">
+        <div class="login_page">
+            <div class="form">
+                
+                <form class="login_form"> <input type="text" placeholder="Kulanıcı Adı"  value="{{request.form.username }}">
+                <input type="password" placeholder="Şifre" value="{{request.form.password }}"> <button>Giriş Yap</button>
+                <p class="message">Üye değil misin? <a href="/register">Hemen Üye Ol!</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
 
