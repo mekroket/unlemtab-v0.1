@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% block body %}
+{% from "includes/formhelpers.html" import render_field %}
+
 
 <div class="col-md-12">
         <div class="login_page">
             <div class="form">
                 
-                <form class="login_form"> <input type="text" placeholder="Kulanıcı Adı"  value="{{request.form.username }}">
-                <input type="password" placeholder="Şifre" value="{{request.form.password }}"> <button>Giriş Yap</button>
-                <p class="message">Üye değil misin? <a href="/register">Hemen Üye Ol!</a></p>
+                <form method = "post" >
+                {{ render_field(form.username) }}
+                {{ render_field(form.password) }}
+                <button type="submit" class="btn btn-primary">Giriş Yap</button>
                 </form>
             </div>
         </div>
     </div>
-
 
 
 

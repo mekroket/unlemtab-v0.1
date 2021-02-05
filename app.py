@@ -19,7 +19,7 @@ def login_required(f):
 #Kullanıcı kayıt formu
 class RegisterForm(Form):
     name = StringField("İsim Soyisim:",validators=[validators.length(min=4,max=35)])
-    username = StringField("Kullancıcı Adı:",validators=[validators.length(min=3,max=25)])
+    username = StringField("Kullanıcı Adı:",validators=[validators.length(min=3,max=25)])
     email = StringField("Eposta:",validators=[validators.email(message="Lütfen Geçerli Bir E-mail Adreis Giriniz")])
     password = PasswordField("Parolanız:",validators=[
         validators.DataRequired(message="Lütfen Bir Parola Belirleyiniz"),
@@ -29,8 +29,8 @@ class RegisterForm(Form):
 
 #Kullanıcı Login Form
 class LoginForm(Form):
-    username = StringField("Kullanıcı Adı:")
-    password = PasswordField("Parola:")
+    username = StringField("Kullanıcı Adınız :")
+    password = PasswordField("Parolanız:")
 app = Flask(__name__)
 app.secret_key="unlemtab"
 
@@ -62,7 +62,7 @@ def article():
 @app.route("/register",methods =["GET","POST"])
 def register():
     form = RegisterForm(request.form)
-    return render_template("register.html")
+    
 
     if request.method == "POST" and form.validate():
         name = form.name.data
@@ -80,12 +80,12 @@ def register():
         flash("Başarıyla Kayıt Oldunuz","succes")
         return redirect(url_for("login"))
     else:
-        return render_template("register.html",form=form)
+        return render_template("register.html",form = form)
 
 
 
 #giriş yapma
-@app.route("/login")
+@app.route("/login",methods =["GET","POST"])
 def login():
     form = LoginForm(request.form)
     if request.method =="POST":
@@ -93,7 +93,7 @@ def login():
         password_entered = form.password.data
         sorgu = "Select * From users where username = %s"
         cursor = mysql.connection.cursor()
-        rusult = cursor.execute(sorgu,(username,))
+        result = cursor.execute(sorgu,(username,))
 
         if result >0:
             data = cursor.fetchone()
