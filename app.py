@@ -81,8 +81,8 @@ def article(id):
 
 #makale formu oluşturma işlemi
 class ArticleForm(Form):
-    title = StringField("Makale Başlığı",validators=[validators.length(min = 6,max=100)])
-    content = TextAreaField("Makale İçeriği",validators=[validators.length(min =10)])
+    title = StringField("Konunuz",validators=[validators.length(min = 6,max=100)])
+    content = TextAreaField("Konu İçeriği",validators=[validators.length(min =10)])
 
 
 
