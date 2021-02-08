@@ -66,6 +66,28 @@ def articles():
     else:
         return render_template("articles.html")
 
+#makale detayları sayfası
+@app.route("/article/<string:id>")
+def article(id):
+    cursor = mysql.connection.cursor()
+    sorgu = "Select * From articles where id = %s"
+    result = cursor.execute(sorgu,(id,))
+
+    if result >0:
+        article = cursor.fetchall()
+        return render_template("article.html",article = article)
+    else:
+        return render_template("article.html")
+
+#makale formu oluşturma işlemi
+class ArticleForm(Form):
+    title = StringField("Makale Başlığı",validators=[validators.length(min = 6,max=100)])
+    content = TextAreaField("Makale İçeriği",validators=[validators.length(min =10)])
+
+
+
+
+
 #kayıt olma
 @app.route("/register",methods =["GET","POST"])
 def register():
@@ -142,19 +164,19 @@ def projects():
 
 
 @app.route("/dashboard")
-@login_required #dashboardı izinli yapıyoruz
+@login_required #dashbordu izinsiz kullanmamak için bunu yapıyoruz
 def dashboard():
     cursor = mysql.connection.cursor()
     sorgu = "Select * From articles where author = %s"
-    result = cursor.execute(sorgu,(session["username"],))  #giriş yapanın ismi
+    result = cursor.execute(sorgu,(session["username"],))  #yine veritabanı
 
-    if result >0:
+    if result > 0:
         articles = cursor.fetchall()
         return render_template("dashboard.html",articles = articles)
     else:
         return render_template("dashboard.html")
 
-    return render_template("dashboard.html")
+    
 
 
 #makale ekleme 
