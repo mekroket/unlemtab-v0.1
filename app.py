@@ -57,11 +57,11 @@ def index():
 @app.route("/articles")
 def articles():
     cursor = mysql.connection.cursor()
-    sorgu = "Select *From articles"
+    sorgu = "Select * From articles"
     result = cursor.execute(sorgu)
 
     if result >0:
-        articles = fetchall()
+        articles = cursor.fetchall()
         return render_template("articles.html",articles = articles) #makale varsa gösterir yoksa boş döner
     else:
         return render_template("articles.html")
@@ -196,7 +196,7 @@ def addarticle():
 
         flash("Makale Başarıyla Eklendi")
         return redirect(url_for("dashboard"))
-    return render_template("addarticle.html")
+    return render_template("addarticle.html",form = form)
 
 
 
