@@ -199,8 +199,64 @@ def addarticle():
     return render_template("addarticle.html",form = form)
 
 
+#makale güncelleme
+@app.route("/edit/<string:id>",methods=["GET","POST"])
+@login_required
+def update(id):
+   if request.method == "GET":
+       cursor = mysql.connection.cursor()
 
+       sorgu = "Select * from articles where id = %s and author = %s"
+       result = cursor.execute(sorgu,(id,session["username"]))
 
+       if result == 0:
+           flash("Böyle bir makale yok veya bu işleme yetkiniz yok","danger")
+           return redirect(url_for("index"))
+       else:
+           article = cursor.fetchone()
+           form = ArticleForm()
+
+           form.title.data = article["title"]
+           form.content.data = article["content"]
+           return render_template("update.html",form = form)
+
+   else:
+       # POST REQUEST
+       form = ArticleForm(request.form)
+
+       newTitle = form.title.data
+       newContent = form.content.data
+
+       sorgu2 = "Update articles Set title = %s,content = %s where id = %s "
+
+       cursor = mysql.connection.cursor()
+
+       cursor.execute(sorgu2,(newTitle,newContent,id))
+
+       mysql.connection.commit()
+
+       flash("Makale başarıyla güncellendi","success")
+
+       return redirect(url_for("dashboard"))
+
+       pass
+
+#makale silme
+@app.route("/delete/<string:id>")
+@login_required
+def delete(id):
+    cursor = mysql.connection.cursor()
+    sorgu = "Select * From articles where author = %s and id = %s"
+    result = cursor.execute(sorgu,(session["username"],id))
+    
+    if result > 0:
+       sorgu2 = "Delete from articles where id = %s"
+       cursor.execute(sorgu2,(id,))
+       mysql.connection.commit()
+       return redirect(url_for("dashboard"))
+    else:
+        flash("Bu makaleyi silme yetkiniz yok")
+        return redirect(url_for("index"))
 
 
 
