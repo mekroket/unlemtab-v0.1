@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h3>Makaleler</h3>
+<h1  style = "padding-left:3%;">Makaleler</h1>
 <hr>
 {% if articles %}
 <div class="list-group">
   {% for article in articles  %}
     <a href="/article/{{article.id}}" class="list-group-item list-group-item-action active" aria-current="true">
     <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"></h5>
-      <small>3 days ago</small>
+      <h5 class="mb-1">-Konu-</h5>
+      <small>{{article.created_date}}</small>
     </div>
     {{article.title}}
   </a>

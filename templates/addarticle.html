@@ -6,10 +6,10 @@
 {% from "includes/formhelpers.html" import render_field %}
 <p></p>
 <form method = "post">
-        {{ render_field(form.title) }}
-        {{ render_field(form.content) }}
+        <div style = "padding-left:0.5%;"> {{ render_field(form.title) }}</div>
+        <div style = "padding-left:0.5%;">{{ render_field(form.content) }}</div>
         
-        <button type="submit" class="btn btn-">Makale Ekle</button>
+        <button type="submit" class="btn btn-"  style = "margin-left:0.5%;">Makale Ekle</button>
     </form>
 
 
