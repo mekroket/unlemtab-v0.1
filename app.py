@@ -66,16 +66,16 @@ def articles():
     else:
         return render_template("articles.html")
 
-#makale detayları sayfası
+#detay sayfası
 @app.route("/article/<string:id>")
 def article(id):
     cursor = mysql.connection.cursor()
     sorgu = "Select * From articles where id = %s"
     result = cursor.execute(sorgu,(id,))
 
-    if result >0:
-        article = cursor.fetchall()
-        return render_template("article.html",article = article)
+    if result > 0:
+        article = cursor.fetchone()
+        return render_template("article.html",article= article)
     else:
         return render_template("article.html")
 
