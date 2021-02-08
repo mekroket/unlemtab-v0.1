@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h3>Kontrol Paneli</h3>
-<small>Hoşgeldin,{{session["username"]}}</small>  <!-- Burda admin paneline giren kişiye özel yazı gösteriliyor  -->
+<h3 style = "padding-left:1%;">Kontrol Paneli</h3>
+<small style = "padding-left:3%;">Hoşgeldin,{{session["username"]}}</small>  <!-- Burda admin paneline giren kişiye özel yazı gösteriliyor  -->
 <hr>
 
-<a href="/addarticle" class="btn btn-danger" style = "color:black;">Makale Ekle</a>
+<a href="/addarticle" class="btn btn-danger" style = "color:black; margin-left:1%; " style = "padding-left:3%;">Makale Ekle</a>
+<hr>
 
 {% if articles %}
 <table class="table " style = "color:white;">
