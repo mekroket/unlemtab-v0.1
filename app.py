@@ -54,9 +54,17 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/article")
-def article():
-    return render_template("article.html")
+@app.route("/articles")
+def articles():
+    cursor = mysql.connection.cursor()
+    sorgu = "Select *From articles"
+    result = cursor.execute(sorgu)
+
+    if result >0:
+        articles = fetchall()
+        return render_template("articles.html",articles = articles) #makale varsa gösterir yoksa boş döner
+    else:
+        return render_template("articles.html")
 
 #kayıt olma
 @app.route("/register",methods =["GET","POST"])
@@ -123,13 +131,65 @@ def login():
 @app.route("/logout")
 def logout():
     session.clear()
-    return(url_for("index"))
+    return redirect(url_for("index"))
+    flash("Başarıyla Çıkış Yapıldı,","succes")
 
 
 @app.route("/projects")
 def projects():
     return render_template("projects.html")
    
+
+
+@app.route("/dashboard")
+@login_required #dashboardı izinli yapıyoruz
+def dashboard():
+    cursor = mysql.connection.cursor()
+    sorgu = "Select * From articles where author = %s"
+    result = cursor.execute(sorgu,(session["username"],))  #giriş yapanın ismi
+
+    if result >0:
+        articles = cursor.fetchall()
+        return render_template("dashboard.html",articles = articles)
+    else:
+        return render_template("dashboard.html")
+
+    return render_template("dashboard.html")
+
+
+#makale ekleme 
+@app.route("/addarticle",methods =["GET","POST"])
+def addarticle():
+    form = ArticleForm(request.form)
+    if request.method == "POST" and form.validate():
+        title = form.title.data
+        content = form.content.data 
+
+        cursor = mysql.connection.cursor()
+        sorgu = "Insert into articles(title,author,content) VALUES(%s,%s,%s)"
+        cursor.execute(sorgu,(title,session["username"],content))
+
+        mysql.connection.commit()
+        cursor.close()
+
+        flash("Makale Başarıyla Eklendi")
+        return redirect(url_for("dashboard"))
+    return render_template("addarticle.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
