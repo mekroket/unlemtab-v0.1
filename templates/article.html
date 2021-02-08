@@ -2,16 +2,17 @@
 
 
 {% block body %}
-<h1>article</h1>
+<h1 style = "padding-left:2%;">Makaleler</h1>
+<hr>
 {% if article %}
 
-<h4>{{article.title}}</h4>
+<h4 style = "padding-left:3%;">Konu : {{article.title}}</h4>
 <hr>
-Yazar : {{article.author}}
+ <h4 style = "padding-left:3%;">Yazar : {{article.author}}</h4>   
 <hr>
-Tarih : {{article.created_date}}
+<h5 style = "padding-left:3%;">Tarih : {{article.created_date}}</h5>
 <hr>
-{{article.content | safe}} 
+<div style = "padding-left:3%;" >{{article.content | safe}} </div>
 
 
 {% else %}

@@ -4,15 +4,25 @@
 <h3>Makaleler</h3>
 <hr>
 {% if articles %}
-<ul class="list-group">
+<div class="list-group">
   {% for article in articles  %}
-  <li class="list-group-item"><a href="/article/{{article.id}}">{{article.title}}</a></li>
+    <a href="/article/{{article.id}}" class="list-group-item list-group-item-action active" aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"></h5>
+      <small>3 days ago</small>
+    </div>
+    {{article.title}}
+  </a>
+  <br>
   {% endfor %}
-</ul>
+</div>
 
 {% else %}
 <div class="alert alert-danger">Bu blogta henüz makale bulunmuyor</div>
 {% endif %}
+<br>
+
+
 
 
 
